@@ -14,8 +14,7 @@ def predict_single(penguin, dv, sc, model):
     
     penguin_cat = dv.transform(penguin_df[categorical].to_dict(orient='records'))
     penguin_num = sc.transform(penguin_df[numerical])
-    penguin_std = np.hstack([penguin_cat, penguin_num])
-    
+    penguin_std = np.hstack([penguin_num, penguin_cat])
     y_pred = model.predict(penguin_std)[0]
     y_prob = model.predict_proba(penguin_std)[0][y_pred]
     return (y_pred, y_prob)
